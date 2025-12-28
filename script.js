@@ -30,14 +30,14 @@ checkLogin();
 
 // ===== APP =====
 function startApp() {
-  // Filmler dizisi
-  const movies = [
+  const username = localStorage.getItem("username");
+  
+  // LocalStorage'dan filmleri yükle, yoksa default filmler
+  let movies = JSON.parse(localStorage.getItem("movies")) || [
     { title: "Inception", video: "https://www.youtube.com/embed/YoHD9XEInc0" },
-    { title: "Interstellar", video: "https://www.youtube.com/embed/zSWdZVtXT7E" },
-    { title: "Joker", video: "https://www.youtube.com/embed/zAGVQLHvwOY" }
+    { title: "Interstellar", video: "https://www.youtube.com/embed/zSWdZVtXT7E" }
   ];
 
-  const username = localStorage.getItem("username");
   let favorites = JSON.parse(localStorage.getItem(`favorites_${username}`)) || [];
 
   // MENU
@@ -89,7 +89,6 @@ function startApp() {
       const item = document.createElement("div");
       item.className = "movie";
 
-      // overlay-wrapper
       const overlayWrapper = document.createElement("div");
       overlayWrapper.className = "overlay-wrapper";
 
@@ -100,15 +99,13 @@ function startApp() {
 
       overlayWrapper.appendChild(play);
 
-      // title
       const title = document.createElement("span");
       title.textContent = movie.title;
 
-      // favorite button
       const btn = document.createElement("button");
       btn.textContent = favorites.includes(movie.title) ? "Favorilerden Çıkar" : "Favorilere Ekle";
       btn.onclick = (e) => {
-        e.stopPropagation(); // overlay clickini engelle
+        e.stopPropagation();
         if (favorites.includes(movie.title)) favorites = favorites.filter(f => f !== movie.title);
         else favorites.push(movie.title);
         localStorage.setItem(`favorites_${username}`, JSON.stringify(favorites));
@@ -160,14 +157,15 @@ function startApp() {
       return;
     }
 
+    // Filmleri ekle ve LocalStorage'a kaydet
     movies.push({ title, video });
+    localStorage.setItem("movies", JSON.stringify(movies));
 
     newTitleInput.value = "";
     newVideoInput.value = "";
 
     renderActive();
-
-    alert(`"${title}" filmi eklendi!`);
+    alert(`"${title}" filmi eklendi ve kaydedildi!`);
   };
 }
 
