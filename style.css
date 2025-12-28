@@ -92,7 +92,6 @@ input {
   cursor: pointer;
 }
 
-/* favorite button overlay’in üstünde */
 .movie button {
   position: relative;
   z-index: 20;
@@ -100,6 +99,7 @@ input {
   width: 100%;
 }
 
+/* modal */
 .modal {
   display: none;
   position: fixed;
@@ -132,4 +132,19 @@ input {
   color: white;
   font-size: 24px;
   cursor: pointer;
+}
+
+/* admin panelu */
+#admin input {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+#admin button {
+  background: #00aa00;
+}
+
+#admin button:hover {
+  background: #00ff00;
 }

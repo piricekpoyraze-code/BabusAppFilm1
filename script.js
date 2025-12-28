@@ -30,6 +30,7 @@ checkLogin();
 
 // ===== APP =====
 function startApp() {
+  // Filmler dizisi
   const movies = [
     { title: "Inception", video: "https://www.youtube.com/embed/YoHD9XEInc0" },
     { title: "Interstellar", video: "https://www.youtube.com/embed/zSWdZVtXT7E" }
@@ -80,6 +81,7 @@ function startApp() {
 
   let activePage = "all";
 
+  // RENDER FONKSİYONU
   function render(list) {
     app.innerHTML = "";
     list.forEach(movie => {
@@ -141,6 +143,31 @@ function startApp() {
   favBtn.onclick = () => { activePage = "fav"; favBtn.classList.add("active"); allBtn.classList.remove("active"); renderActive(); }
 
   render(movies);
+
+  // ===== ADMIN PANEL =====
+  const adminDiv = document.getElementById("admin");
+  const newTitleInput = document.getElementById("newTitle");
+  const newVideoInput = document.getElementById("newVideo");
+  const addMovieBtn = document.getElementById("addMovieBtn");
+
+  addMovieBtn.onclick = () => {
+    const title = newTitleInput.value.trim();
+    const video = newVideoInput.value.trim();
+
+    if (!title || !video) {
+      alert("Film adı ve video linki girin!");
+      return;
+    }
+
+    movies.push({ title, video });
+
+    newTitleInput.value = "";
+    newVideoInput.value = "";
+
+    renderActive();
+
+    alert(`"${title}" filmi eklendi!`);
+  };
 }
 
 // PWA
