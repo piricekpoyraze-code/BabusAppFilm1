@@ -80,22 +80,28 @@ function startApp() {
 
   let activePage = "all";
 
-  // RENDER FONKSİYONU
   function render(list) {
     app.innerHTML = "";
     list.forEach(movie => {
-      const item = document.createElement("div"); item.className = "movie";
+      const item = document.createElement("div");
+      item.className = "movie";
 
-      // PLAY overlay (sadece üst kısım)
+      // overlay-wrapper
+      const overlayWrapper = document.createElement("div");
+      overlayWrapper.className = "overlay-wrapper";
+
       const play = document.createElement("div");
       play.className = "play-overlay";
       play.textContent = "▶ İZLE";
       play.onclick = () => { iframe.src = movie.video; modal.style.display = "flex"; };
 
-      // TITLE
-      const title = document.createElement("span"); title.textContent = movie.title;
+      overlayWrapper.appendChild(play);
 
-      // FAVORITE BUTTON
+      // title
+      const title = document.createElement("span");
+      title.textContent = movie.title;
+
+      // favorite button
       const btn = document.createElement("button");
       btn.textContent = favorites.includes(movie.title) ? "Favorilerden Çıkar" : "Favorilere Ekle";
       btn.onclick = (e) => {
@@ -106,14 +112,13 @@ function startApp() {
         renderActive();
       };
 
-      item.appendChild(play);
+      item.appendChild(overlayWrapper);
       item.appendChild(title);
       item.appendChild(btn);
       app.appendChild(item);
     });
   }
 
-  // RENDER ACTIVE
   function renderActive() {
     let list;
     if (activePage === "all") {
@@ -132,14 +137,13 @@ function startApp() {
     render(list);
   }
 
-  // MENÜ BUTONLARI
   allBtn.onclick = () => { activePage = "all"; allBtn.classList.add("active"); favBtn.classList.remove("active"); renderActive(); }
   favBtn.onclick = () => { activePage = "fav"; favBtn.classList.add("active"); allBtn.classList.remove("active"); renderActive(); }
 
   render(movies);
 }
 
-// ===== PWA Service Worker =====
+// PWA
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js')
     .then(() => console.log('Service Worker registered'))
