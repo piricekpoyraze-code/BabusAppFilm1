@@ -33,7 +33,8 @@ function startApp() {
   // Filmler dizisi
   const movies = [
     { title: "Inception", video: "https://www.youtube.com/embed/YoHD9XEInc0" },
-    { title: "Interstellar", video: "https://www.youtube.com/embed/zSWdZVtXT7E" }
+    { title: "Interstellar", video: "https://www.youtube.com/embed/zSWdZVtXT7E" },
+    { title: "Joker", video: "https://www.youtube.com/embed/zAGVQLHvwOY" }
   ];
 
   const username = localStorage.getItem("username");
