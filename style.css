@@ -1,18 +1,147 @@
-body { margin:0; background:#111; color:white; font-family:Arial,sans-serif; }
-header { background:#e50914; padding:15px; text-align:center; font-size:24px; }
-.login { max-width:300px; margin:80px auto; background:#222; padding:20px; border-radius:10px; text-align:center; }
-.login input { width:100%; padding:10px; margin-bottom:10px; border:none; border-radius:6px; }
-.login button { width:100%; background:#e50914; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer; }
-.menu { display:flex; justify-content:center; gap:10px; padding:10px; background:#000; }
-.menu button { background:#222; color:white; border:none; padding:8px 14px; border-radius:6px; cursor:pointer; }
-.menu button.active { background:#e50914; }
-.app { padding:15px; display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:15px; }
-.movie { position:relative; background:#222; border-radius:10px; padding:10px; }
-.movie span { display:block; text-align:center; margin:8px 0; font-weight:bold; }
-.movie button { width:100%; background:#e50914; border:none; color:white; padding:8px; border-radius:6px; cursor:pointer; }
-.play-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; font-size:22px; font-weight:bold; opacity:0; cursor:pointer; transition:0.3s; border-radius:10px; }
-.movie:hover .play-overlay { opacity:1; }
-.modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:9999; }
-.modal-content { position:relative; width:100%; max-width:900px; }
-.modal-content video { width:100%; height:100vh; object-fit:cover; border-radius:10px; }
-.close { position:absolute; top:-35px; right:0; font-size:32px; cursor:pointer; }
+/* ===== GENEL ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+button {
+  cursor: pointer;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #ff0000;
+  color: white;
+  margin-left: 5px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff5555;
+}
+
+input {
+  outline: none;
+}
+
+/* ===== LOGIN ===== */
+#login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#login input {
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  width: 200px;
+}
+
+/* ===== MENU ===== */
+.menu {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #111;
+  flex-wrap: wrap;
+}
+
+.menu button.active {
+  background: #ff5555;
+}
+
+/* ===== APP ===== */
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: center;
+}
+
+.movie {
+  position: relative;
+  background: #111;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.movie span {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* ===== PLAY OVERLAY ===== */
+.play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none; /* hover öncesi tıklamayı devre dışı bırak */
+}
+
+.movie:hover .play-overlay {
+  opacity: 1;
+  pointer-events: auto; /* hover olduğunda tıklanabilir */
+}
+
+/* ===== MODAL ===== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #000;
+  padding: 10px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.modal-content iframe {
+  max-width: 90vw;
+  max-height: 60vh;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ===== FAVORITE BUTON ===== */
+.movie button {
+  position: relative; /* overlay’in üstünde tıklanabilir */
+  z-index: 10;
+  width: 100%;
+  margin-top: 5px;
+}

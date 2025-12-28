@@ -86,14 +86,20 @@ function startApp() {
     list.forEach(movie => {
       const item = document.createElement("div"); item.className = "movie";
 
-      const play = document.createElement("div"); play.className = "play-overlay"; play.textContent = "▶ İZLE";
+      // PLAY overlay
+      const play = document.createElement("div");
+      play.className = "play-overlay";
+      play.textContent = "▶ İZLE";
       play.onclick = () => { iframe.src = movie.video; modal.style.display = "flex"; };
 
+      // TITLE
       const title = document.createElement("span"); title.textContent = movie.title;
 
+      // FAVORITE BUTTON
       const btn = document.createElement("button");
       btn.textContent = favorites.includes(movie.title) ? "Favorilerden Çıkar" : "Favorilere Ekle";
-      btn.onclick = () => {
+      btn.onclick = (e) => {
+        e.stopPropagation(); // overlay clickini engelle
         if (favorites.includes(movie.title)) favorites = favorites.filter(f => f !== movie.title);
         else favorites.push(movie.title);
         localStorage.setItem(`favorites_${username}`, JSON.stringify(favorites));
