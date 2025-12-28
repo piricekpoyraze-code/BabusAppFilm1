@@ -2,31 +2,28 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>BabusApp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BabusApp</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#e50914">
 </head>
 <body>
-
-  <header>BabusApp 🎬</header>
-
-  <div id="login" class="login">
-    <h2>Giriş Yap</h2>
+  <!-- LOGIN -->
+  <div id="login">
+    <h2>BabusApp Giriş</h2>
     <input type="text" id="username" placeholder="Kullanıcı Adı">
     <button id="loginBtn">Giriş Yap</button>
   </div>
 
+  <!-- APP AREA -->
   <div id="appArea" style="display:none;"></div>
 
+  <!-- ADMIN PANEL -->
+  <div id="admin" style="padding:10px; background:#111; color:white; display:flex; gap:10px; flex-wrap:wrap;">
+    <input type="text" id="newTitle" placeholder="Film Adı" style="padding:5px; border-radius:5px; border:none; width:150px;">
+    <input type="text" id="newVideo" placeholder="YouTube Embed Linki" style="padding:5px; border-radius:5px; border:none; width:250px;">
+    <button id="addMovieBtn">Filmi Ekle</button>
+  </div>
+
   <script src="script.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-      .then(reg => console.log('Service Worker Registered', reg))
-      .catch(err => console.log('Service Worker Failed', err));
-    }
-  </script>
 </body>
 </html>
