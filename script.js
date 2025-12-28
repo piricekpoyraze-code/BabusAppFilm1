@@ -59,7 +59,7 @@ function startApp() {
   searchInput.style.border = "none";
   searchInput.style.background = "#333";
   searchInput.style.color = "white";
-  searchInput.style.display = "none"; // başta gizli
+  searchInput.style.display = "none"; 
   menu.appendChild(searchInput);
   searchInput.oninput = renderActive;
 
@@ -86,7 +86,7 @@ function startApp() {
     list.forEach(movie => {
       const item = document.createElement("div"); item.className = "movie";
 
-      // PLAY overlay
+      // PLAY overlay (sadece üst kısım)
       const play = document.createElement("div");
       play.className = "play-overlay";
       play.textContent = "▶ İZLE";
@@ -113,7 +113,7 @@ function startApp() {
     });
   }
 
-  // RENDER ACTIVE (arama ve alfabetik sıralama dahil)
+  // RENDER ACTIVE
   function renderActive() {
     let list;
     if (activePage === "all") {
@@ -124,11 +124,9 @@ function startApp() {
       searchInput.style.display = "inline-block";
     }
 
-    // Arama filtreleme
     const searchTerm = searchInput.value.toLowerCase();
     if (searchTerm) list = list.filter(m => m.title.toLowerCase().includes(searchTerm));
 
-    // Alfabetik sıralama
     list.sort((a, b) => a.title.localeCompare(b.title));
 
     render(list);
@@ -138,7 +136,6 @@ function startApp() {
   allBtn.onclick = () => { activePage = "all"; allBtn.classList.add("active"); favBtn.classList.remove("active"); renderActive(); }
   favBtn.onclick = () => { activePage = "fav"; favBtn.classList.add("active"); allBtn.classList.remove("active"); renderActive(); }
 
-  // İLK RENDER
   render(movies);
 }
 
